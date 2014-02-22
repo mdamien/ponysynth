@@ -27,6 +27,9 @@ app.add_url_rule('/songs/<int:song_id>/edit', 'edit_song', view_func=views.edit_
 # Delete a song
 app.add_url_rule('/songs/<int:song_id>/delete', view_func=views.delete_song, methods=['POST'])
 
+# Generate the song file
+app.add_url_rule('/songs/<int:song_id>/generate', view_func=views.generate_song, methods=['GET'])
+
 
 ## Error handlers
 # Handle 404 errors
