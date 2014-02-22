@@ -8,15 +8,14 @@
 
 {% block content %}
 
-    <h1 id="">All Songs</h1>
+    <h1 id="">All your songs</h1>
     <div>&nbsp;</div>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Name</th>
-                <th>Added by</th>
-                <th>Added on</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
             </tr>
@@ -25,10 +24,7 @@
             {% for song in songs %}
             {% set song_id = song.key.id() %}
             <tr>
-                <td>{{ song_id }}</td>
                 <td>{{ song.name }}</td>
-                <td>{{ song.added_by }}</td>
-                <td class="nowrap">{{ song.timestamp.strftime('%b %d, %Y %I:%M %p') }}</td>
                 <td>
                     <a href="{{ url_for('edit_song', song_id=song_id) }}" class="btn">Edit</a>
                 </td>
@@ -36,6 +32,12 @@
                     <form method="post" action="{{ url_for('delete_song', song_id=song_id) }}">
                         <button class="btn">Delete</button>
                     </form>
+                </td>
+                <td>
+                    <a href="{{ url_for('generate_song', song_id=song_id) }}" class="btn">Download</a>
+                </td>
+                <td>
+                    <a href="{{ url_for('export_song', song_id=song_id) }}" class="btn">Export</a>
                 </td>
             </tr>
             {% else %}
@@ -49,6 +51,11 @@
             New song
         </a>
     </p>
+    <p> 
+    <form action="{{ url_for('import_song') }}" method="post" enctype="multipart/form-data">{{ form.hidden_tag() }}
+    <frameset>{{ import_form.json.label }} : {{ import_form.json()|safe }} <input type="submit" name="submit" value="Import"></frameset>
+</form>
+    </p>
 
     {% include 'new_song.html' %} {# pull in new_song form (modal dialog) #}
 
@@ -60,14 +67,9 @@
             validate: function (form, evt) {
                 // Form validation for modal dialog
                 var song_name = form.find('#name').val();
-                var song_description = form.find('#content').val();
                 if (!(song_name)) {
                     evt.preventDefault();
                     Utils.renderFieldErrorTooltip('#name', 'Name is required', 'right');
-                }
-                if (!(song_description)) {
-                    evt.preventDefault();
-                    Utils.renderFieldErrorTooltip('#content', 'Content is required', 'right');
                 }
             },
             init: function () {

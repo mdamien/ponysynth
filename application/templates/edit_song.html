@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="control-group">
-                <div class="control-label">{{ form.content.label }}</div>
+                <div class="control-label">Song</div>
                 <div class="controls">
                     {{ form.content|safe }}
                     {% if form.content.errors %}
@@ -32,6 +32,15 @@
                         </ul>
                     {% endif %}
                 </div>
+            </div>
+            <div class="control-group">
+                <h4> Syntax </h4>
+                <p>A,B,C,D,E,F,G for the note, a # for sharp or a * for a little bit louder and an optional number for the length (0..9).</br>
+                Also, you can add a space for rest (you can add a length for the rest)</br>
+                Example:
+                <pre>
+                    A4BCD3F*3 3F3DEFC#3FF
+                </pre>
             </div>
             <div class="control-group">
                 <div class="controls">

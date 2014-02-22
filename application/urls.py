@@ -30,6 +30,12 @@ app.add_url_rule('/songs/<int:song_id>/delete', view_func=views.delete_song, met
 # Generate the song file
 app.add_url_rule('/songs/<int:song_id>.wav', view_func=views.generate_song, methods=['GET'])
 
+# Export song to JSON
+app.add_url_rule('/songs/<int:song_id>.json', view_func=views.export_song, methods=['GET'])
+
+# Import song from JSON
+app.add_url_rule('/songs/import/json', view_func=views.import_song, methods=['POST'])
+
 
 ## Error handlers
 # Handle 404 errors

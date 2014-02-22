@@ -22,19 +22,6 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <div class="control-label">{{ form.content.label }}</div>
-                    <div class="controls">
-                        {{ form.content|safe }}
-                        {% if form.content.errors %}
-                        <ul class="errors">
-                            {% for error in form.content.errors %}
-                            <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                </div>
-                <div class="control-group">
                     <div class="controls">
                         <input class="btn btn-primary" type="submit" value="Add song"/>
                         <button class="btn" data-dismiss="modal">Cancel</button>
