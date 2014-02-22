@@ -11,7 +11,7 @@ For example the *say_hello* handler, handling the URL route '/hello/<username>',
 from google.appengine.api import users
 from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
 
-from flask import request, render_template, flash, url_for, redirect
+from flask import request, render_template, flash, url_for, redirect, send_file
 
 from flask_cache import Cache
 
@@ -20,7 +20,9 @@ from decorators import login_required, admin_required
 from forms import SongForm
 from models import SongModel
 
-from pysynth.song_parser import parse
+import song_parser
+from pysynth import make_wav
+import StringIO
 
 def home():
     return redirect(url_for('list_songs'))
@@ -74,9 +76,13 @@ def delete_song(song_id):
 
 @login_required
 def generate_song(song_id):
+    file_ = StringIO.StringIO()
     song = SongModel.get_by_id(song_id)
-    return str(song_parser.parse(song.content))
-
+    parsed_song = song_parser.parse(song.content)
+    make_wav(parsed_song,fn=file_)
+    file_.seek(0)
+    return send_file(file_, attachment_filename="%s.wav" % song_id,as_attachment=True)
+    
 def warmup():
     return ''
 
