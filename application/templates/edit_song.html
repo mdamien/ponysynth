@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3>Edit Example</h3>
-    <form id="edit-example" class="well form-horizontal"
-          action="{{ url_for('edit_example', example_id=example.key.id()) }}" method="post" accept-charset="utf-8">
+    <h3>Edit song</h3>
+    <form id="edit-song" class="well form-horizontal"
+          action="{{ url_for('edit_song', song_id=song.key.id()) }}" method="post" accept-charset="utf-8">
         <fieldset>
             {{ form.hidden_tag() }}
             <input type="hidden" name="mode" value="edit" />
             <div class="control-group">
-                <div class="control-label">{{ form.example_name.label }}</div>
+                <div class="control-label">{{ form.name.label }}</div>
                 <div class="controls">
-                    {{ form.example_name|safe }}
-                    {% if form.example_name.errors %}
+                    {{ form.name|safe }}
+                    {% if form.name.errors %}
                         <ul class="errors">
-                            {% for error in form.example_name.errors %}
+                            {% for error in form.name.errors %}
                                 <li>{{ error }}</li>
                             {% endfor %}
                         </ul>
@@ -21,12 +21,12 @@
                 </div>
             </div>
             <div class="control-group">
-                <div class="control-label">{{ form.example_description.label }}</div>
+                <div class="control-label">{{ form.content.label }}</div>
                 <div class="controls">
-                    {{ form.example_description|safe }}
-                    {% if form.example_description.errors %}
+                    {{ form.content|safe }}
+                    {% if form.content.errors %}
                         <ul class="errors">
-                            {% for error in form.example_description.errors %}
+                            {% for error in form.content.errors %}
                                 <li>{{ error }}</li>
                             {% endfor %}
                         </ul>
@@ -36,7 +36,7 @@
             <div class="control-group">
                 <div class="controls">
                     <input class="btn btn-primary" type="submit" value="Save Changes"/>
-                    <a class="btn cancel" href="{{ url_for('list_examples') }}">Cancel</a>
+                    <a class="btn cancel" href="{{ url_for('list_songs') }}">Cancel</a>
                 </div>
             </div>
         </fieldset>
