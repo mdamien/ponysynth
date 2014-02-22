@@ -39,38 +39,9 @@ class DemoTestCase(unittest.TestCase):
         rv = self.app.get('/')
         assert rv.status == '302 FOUND'    
 
-    def test_says_hello(self):
-        rv = self.app.get('/hello/world')
-        assert 'Hello world' in rv.data
-
     def test_displays_no_data(self):
-        rv = self.app.get('/examples')
-        assert 'No examples yet' in rv.data
-
-    def test_inserts_data(self):
-        self.setCurrentUser(u'john@example.com', u'123')
-        rv = self.app.post('/example/new', data=dict(
-            example_name='An example',
-            example_description='Description of an example'
-        ), follow_redirects=True)
-        assert 'Example successfully saved' in rv.data
-
-        rv = self.app.get('/examples')
-        assert 'No examples yet' not in rv.data
-        assert 'An example' in rv.data
-    
-    def test_admin_login(self):
-        #Anonymous
-        rv = self.app.get('/admin_only')
-        assert rv.status == '302 FOUND'
-        #Normal user
-        self.setCurrentUser(u'john@example.com', u'123')
-        rv = self.app.get('/admin_only')
-        assert rv.status == '302 FOUND'
-        #Admin
-        self.setCurrentUser(u'john@example.com', u'123', True)
-        rv = self.app.get('/admin_only')
-        assert rv.status == '200 OK'
+        rv = self.app.get('/songs')
+        assert 'No songs yet' in rv.data
 
     def test_404(self):
         rv = self.app.get('/missing')
