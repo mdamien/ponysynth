@@ -17,7 +17,7 @@ from .models import SongModel
 
 class ClassicSongForm(wtf.Form):
     name = wtf.TextField('Name', validators=[validators.Required()])
-    content = wtf.TextAreaField('Song', validators=[validators.Required()])
+    content = wtf.TextAreaField('Song')
 
 class ImportForm(wtf.Form):
     json = wtf.FileField('Import song:', validators=[validators.Required()])
@@ -25,5 +25,5 @@ class ImportForm(wtf.Form):
 # App Engine ndb model form song
 SongForm = model_form(SongModel, wtf.Form, field_args={
     'name': dict(validators=[validators.Required()]),
-    'content': dict(validators=[validators.Required()]),
+    'content': dict(),
 })

@@ -37,7 +37,7 @@ def list_songs():
     if form.validate_on_submit():
         song = SongModel(
             name=form.name.data,
-            content="",
+            content=form.content.data,
             added_by=users.get_current_user()
         )
         try:

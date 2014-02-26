@@ -10,7 +10,11 @@ Important: Place your keys in the secret_keys.py module,
 
 import os
 
-from secret_keys import CSRF_SECRET_KEY, SESSION_KEY
+try:
+    from secret_keys import CSRF_SECRET_KEY, SESSION_KEY
+except ImportError:
+    print "You need to generate the secret keys with generate_keys.py"
+    os.exit()
 
 class Config(object):
     # Set secret keys for CSRF protection
