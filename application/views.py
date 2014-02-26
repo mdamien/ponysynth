@@ -19,7 +19,7 @@ from forms import SongForm, ImportForm
 from models import SongModel
 
 import song_parser
-from pysynth import make_wav
+from synth import make_wav
 import StringIO
 import json
 
