@@ -1,7 +1,7 @@
 ponysynth
 =========
 
-A web synthetizer based on PySynth, Flask and Google App Engine
+A web synthetizer based on PySynth, Flask and Google App Engine  
 Boilerplate via github.com/kamalgill/flask-appengine-template
 
 Setup
